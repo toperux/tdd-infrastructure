@@ -1,0 +1,16 @@
+require 'rake/testtask'
+
+namespace 'test' do
+  desc 'Run acceptance tests'
+  Rake::TestTask.new 'acceptance' do |t|
+    t.test_files = FileList['test/acceptance/**_test.rb']
+  end
+end
+
+task 'test' => 'test:acceptance'
+
+task 'build' do
+  sh 'bundle install --deployment'
+end
+
+task 'default' => 'test'
