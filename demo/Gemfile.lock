@@ -1,0 +1,12 @@
+GEM
+  remote: http://nexus.vm.dev:8081/nexus/content/repositories/rubygems/
+  specs:
+    minitest (5.5.1)
+    rake (10.4.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.5)
+  rake (~> 10.4)
