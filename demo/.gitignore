@@ -1,2 +1,3 @@
 .bundle
 vendor/bundle
+cookbook/files/default/*.tar.gz

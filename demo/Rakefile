@@ -1,4 +1,5 @@
 require 'rake/testtask'
+require 'rake/packagetask'
 
 namespace 'test' do
   desc 'Run acceptance tests'
@@ -7,7 +8,6 @@ namespace 'test' do
   end
 
   desc 'Run unit tests'
-
   Rake::TestTask.new 'unit' do |t|
     t.test_files = FileList['test/**_test.rb']
   end
@@ -20,3 +20,23 @@ task 'build' do
 end
 
 task 'default' => 'test'
+
+package = Rake::PackageTask.new 'hello', :noversion do |p|
+  p.need_tar_gz = true
+  p.package_files.include('config.ru')
+  p.package_files.include('lib/**/*.rb')
+  p.package_files.include('vendor/bundle/**/*')
+  p.package_files.exclude('vendor/bundle/**/cache/*')
+end
+
+Rake::Task['package'].enhance do |p|
+  tarball = File.join package.package_dir, package.tar_gz_file
+  mkdir_p 'cookbook/files/default'
+  mv tarball, 'cookbook/files/default'
+  Rake::Task['clobber_package'].invoke
+end
+
+task 'clean' => 'clobber_package' do
+  tarball = File.join 'cookbook/files/default', package.tar_gz_file
+  rm tarball rescue nil
+end
