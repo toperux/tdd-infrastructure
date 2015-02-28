@@ -1,6 +1,9 @@
 source 'http://nexus.vm.dev:8081/nexus/content/repositories/rubygems/'
 
+gem 'rack'
+
 group 'development' do
   gem 'minitest', '~> 5.5'
+  gem 'rack-test'
   gem 'rake', '~> 10.4'
 end
