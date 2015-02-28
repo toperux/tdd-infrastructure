@@ -7,3 +7,5 @@ platforms:
 
 suites:
   - name: app
+    run_list:
+      - recipe[hello::app]

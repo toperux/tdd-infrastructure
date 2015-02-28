@@ -1,0 +1,7 @@
+DEPENDENCIES
+  hello
+    path: .
+    metadata: true
+
+GRAPH
+  hello (0.0.0)
